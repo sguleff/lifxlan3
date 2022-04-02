@@ -4,14 +4,13 @@ from contextlib import suppress
 from itertools import cycle, chain
 from random import randint, choice, sample, randrange
 from threading import Thread
-from typing import List, NamedTuple, Deque, Dict, Set, Callable, Optional, Iterable, TypeVar, Union
+from typing import NamedTuple, Deque, Dict, Set, Callable, Optional, Iterable
 
 from lifxlan3 import Color, deque, Dir, Colors, Themes
 from lifxlan3.routines import parse_keyboard_inputs, dir_map, ColorTheme, colors_to_theme
 from lifxlan3.routines.tile.core import set_cm, translate, RC, ColorMatrix
-from lifxlan3.routines.tile.tile_utils import mirror, to_n_colors
+from lifxlan3.routines.tile.tile_utils import to_n_colors
 from lifxlan3.routines.tile.a_star import a_star
-from lifxlan3.utils import localtimer
 
 dir_rc_map: Dict[Dir, RC] = {
     Dir.right: RC(0, 1),
