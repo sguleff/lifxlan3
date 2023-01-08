@@ -79,7 +79,10 @@ class Message(object):
         reserved_48_format = self.frame_addr_format[1]
         response_flags_format = self.frame_addr_format[2]
         seq_num_format = self.frame_addr_format[3]
-        mac_addr = little_endian(bitstring.pack(mac_addr_format, convert_MAC_to_int(self.target_addr)))
+        # The issue is that lifxlan used a default behavior for bitstring where '64' is interpreted as 'uint:64'. 
+        # v4.0.1 eliminated that default behavior. 
+        # See: https://github.com/mclarkk/lifxlan/issues/173
+        mac_addr = little_endian(bitstring.pack('uint:' + mac_addr_format, convert_MAC_to_int(self.target_addr)))
         reserved_48 = little_endian(bitstring.pack(reserved_48_format, self.reserved))
         response_flags = little_endian(
             bitstring.pack(response_flags_format, self.reserved, self.ack_requested, self.response_requested))
