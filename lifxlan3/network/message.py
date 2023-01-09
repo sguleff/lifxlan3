@@ -85,7 +85,7 @@ class Message(object):
         mac_addr = little_endian(bitstring.pack('uint:' + mac_addr_format, convert_MAC_to_int(self.target_addr)))
         reserved_48 = little_endian(bitstring.pack('uint:' + reserved_48_format, self.reserved))
         response_flags = little_endian(
-            bitstring.pack(response_flags_format, self.reserved, self.ack_requested, self.response_requested))
+            bitstring.pack('uint:' + response_flags_format, self.reserved, self.ack_requested, self.response_requested))
         seq_num = little_endian(bitstring.pack(seq_num_format, self.seq_num))
         frame_addr = mac_addr + reserved_48 + response_flags + seq_num
         return frame_addr
