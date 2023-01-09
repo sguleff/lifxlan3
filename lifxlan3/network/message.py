@@ -83,7 +83,7 @@ class Message(object):
         # v4.0.1 eliminated that default behavior. 
         # See: https://github.com/mclarkk/lifxlan/issues/173
         mac_addr = little_endian(bitstring.pack('uint:' + mac_addr_format, convert_MAC_to_int(self.target_addr)))
-        reserved_48 = little_endian(bitstring.pack(reserved_48_format, self.reserved))
+        reserved_48 = little_endian(bitstring.pack('uint:' + reserved_48_format, self.reserved))
         response_flags = little_endian(
             bitstring.pack(response_flags_format, self.reserved, self.ack_requested, self.response_requested))
         seq_num = little_endian(bitstring.pack(seq_num_format, self.seq_num))
